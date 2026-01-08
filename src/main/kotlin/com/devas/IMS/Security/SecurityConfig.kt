@@ -39,6 +39,11 @@ class SecurityConfig(
             .authorizeHttpRequests { auth ->
                 auth
                     .requestMatchers("/api/auth/**").permitAll() // Open login/register
+                    .requestMatchers(
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
+                    ).permitAll() // Allow Swagger UI access
                     .anyRequest().authenticated() // Lock everything else
             }
             .sessionManagement { session ->
